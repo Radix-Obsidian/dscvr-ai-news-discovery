@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide will help you deploy the Dscvr AI News Discovery Platform to GitHub and Vercel.
+This guide will help you deploy the Dscvr AI News Discovery Platform to GitHub and Railway.
 
 ## 🚀 Quick Deployment
 
@@ -30,42 +30,31 @@ git remote add origin https://github.com/yourusername/dscvr-ai-news-discovery.gi
 git push -u origin main
 ```
 
-### 3. Deploy to Vercel
-
-1. Go to [Vercel](https://vercel.com) and sign in with GitHub
-2. Click "New Project"
-3. Import your GitHub repository
-4. Configure the project:
-   - **Framework Preset**: Vite
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-   - **Install Command**: `npm install`
-
-5. Add Environment Variables:
-   - `VITE_API_URL`: Your backend API URL (e.g., `https://your-backend.railway.app`)
-
-6. Click "Deploy"
-
-## 🔧 Backend Deployment
-
-### Option 1: Railway (Recommended)
+### 3. Deploy to Railway
 
 1. Go to [Railway](https://railway.app) and sign in with GitHub
 2. Click "New Project" → "Deploy from GitHub repo"
-3. Select your repository
-4. Configure the project:
-   - **Root Directory**: `backend`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `python main.py`
+3. Select your GitHub repository
+4. Railway will automatically detect both frontend and backend services
+5. Configure the services:
+   - **Frontend Service**: Root directory, build command: `npm run build`
+   - **Backend Service**: `backend/` directory, start command: `python main.py`
+6. Add Environment Variables (see Environment Variables section below)
+7. Click "Deploy"
 
-5. Add Environment Variables:
-   ```
-   OLLAMA_HOST=https://your-ollama-instance.com
-   OLLAMA_MODEL=llama2
-   DATABASE_URL=postgresql://...
-   ```
+## 🔧 Railway Configuration
 
-6. Deploy and get your backend URL
+### Frontend Service
+- **Root Directory**: `/` (root of repository)
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Install Command**: `npm install`
+
+### Backend Service
+- **Root Directory**: `backend/`
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `python main.py`
+- **Port**: `8000` (Railway will auto-detect)
 
 ### Option 2: Render
 
@@ -90,10 +79,9 @@ git push -u origin main
 
 2. Deploy using Heroku CLI or GitHub integration
 
-## 🔗 Connect Frontend to Backend
+## 🔗 Railway Services Communication
 
-1. Update the `VITE_API_URL` environment variable in Vercel with your backend URL
-2. Redeploy the frontend if needed
+Railway will automatically handle communication between frontend and backend services. The frontend will be able to reach the backend using the internal Railway network.
 
 ## 🌐 Custom Domain (Optional)
 
@@ -104,37 +92,40 @@ git push -u origin main
 
 ## 🔒 Environment Variables
 
-### Frontend (Vercel)
+### Frontend Service (Railway)
 ```
-VITE_API_URL=https://your-backend-url.com
+VITE_API_URL=https://your-backend-service.railway.app
 ```
 
-### Backend (Railway/Render)
+### Backend Service (Railway)
 ```
 OLLAMA_HOST=https://your-ollama-instance.com
 OLLAMA_MODEL=llama2
 DATABASE_URL=postgresql://...
 SECRET_KEY=your-secret-key
+PORT=8000
 ```
 
 ## 📊 Monitoring
 
-- **Vercel**: Built-in analytics and performance monitoring
-- **Railway**: Logs and metrics in dashboard
-- **Render**: Application logs and health checks
+- **Railway**: Built-in logs, metrics, and performance monitoring
+- **Real-time logs**: View application logs in real-time
+- **Health checks**: Automatic health monitoring
+- **Metrics**: CPU, memory, and network usage
 
 ## 🔄 Continuous Deployment
 
-Both Vercel and Railway/Render will automatically deploy when you push to the main branch.
+Railway will automatically deploy when you push to the main branch.
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Build Fails**: Check build logs for missing dependencies
-2. **API Connection**: Verify `VITE_API_URL` is correct
-3. **CORS Errors**: Ensure backend CORS is configured for your frontend domain
+1. **Build Fails**: Check Railway build logs for missing dependencies
+2. **Service Communication**: Verify internal Railway network communication
+3. **CORS Errors**: Ensure backend CORS is configured for Railway domains
 4. **Database Issues**: Check database connection string and permissions
+5. **Port Issues**: Ensure backend listens on `PORT` environment variable
 
 ### Debug Commands
 

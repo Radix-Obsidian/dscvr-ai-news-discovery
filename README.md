@@ -32,8 +32,8 @@ A modern, AI-powered news discovery platform built with React, TypeScript, and F
 
 ### Infrastructure
 - **Docker** for containerization
-- **Vercel** for frontend deployment
-- **Railway/Render** for backend deployment
+- **Railway** for full-stack deployment (frontend + backend)
+- **PostgreSQL** for database (included with Railway)
 
 ## 🚀 Quick Start
 
@@ -124,17 +124,16 @@ DATABASE_URL=sqlite:///./dscvr_ai.db
 
 ## 🚀 Deployment
 
-### Vercel (Frontend)
-1. Connect your GitHub repository to Vercel
-2. Set build command: `npm run build`
-3. Set output directory: `dist`
-4. Add environment variables in Vercel dashboard
+### Railway (Full-Stack)
+1. Connect your GitHub repository to Railway
+2. Railway will automatically detect frontend and backend services
+3. Configure environment variables in Railway dashboard
+4. Deploy both services with one click
 
-### Railway/Render (Backend)
-1. Connect your GitHub repository
-2. Set build command: `pip install -r requirements.txt`
-3. Set start command: `python main.py`
-4. Add environment variables
+### Manual Setup
+1. **Frontend Service**: Root directory, build command: `npm run build`
+2. **Backend Service**: `backend/` directory, start command: `python main.py`
+3. **Database**: Add PostgreSQL service in Railway
 
 ## 🤝 Contributing
 
@@ -153,7 +152,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Radix UI](https://www.radix-ui.com/) for accessible components
 - [Tailwind CSS](https://tailwindcss.com/) for utility-first CSS
 - [Ollama](https://ollama.ai/) for local AI inference
-- [Vercel](https://vercel.com/) for deployment platform
+- [Railway](https://railway.app/) for full-stack deployment platform
 
 ## 📞 Support
 
