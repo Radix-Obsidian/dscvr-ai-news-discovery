@@ -77,7 +77,12 @@ const popularSources = [
   "The Verge", "Wired", "Ars Technica", "Scientific American", "New Scientist"
 ];
 
-export function CustomContent() {
+interface CustomContentProps {
+  onArticleClick?: (article: any) => void;
+  onCategoryChange?: (category: string) => void;
+}
+
+export function CustomContent({ onArticleClick, onCategoryChange }: CustomContentProps) {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [newFeedName, setNewFeedName] = useState("");
   const [newFeedDescription, setNewFeedDescription] = useState("");

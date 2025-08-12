@@ -16,12 +16,11 @@ interface ChatMessage {
 interface AIChatDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  articleId?: string;
   articleTitle?: string;
   articleContent?: string;
 }
 
-export function AIChatDialog({ isOpen, onClose, articleId, articleTitle, articleContent }: AIChatDialogProps) {
+export function AIChatDialog({ isOpen, onClose, articleTitle, articleContent }: AIChatDialogProps) {
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
