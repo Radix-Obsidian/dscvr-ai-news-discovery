@@ -20,35 +20,14 @@ export function EnhancedArticleDetail({ articleId, onBack }: EnhancedArticleDeta
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [readingProgress, setReadingProgress] = useState(0);
   
-  // Mock article data as fallback
-  const mockArticle: Article = {
-    id: articleId,
-    title: "AI Breakthrough: New Model Achieves Human-Level Reasoning",
-    blurb: "A new AI model demonstrates human-level reasoning capabilities, marking a significant breakthrough in artificial intelligence research.",
-    content: "A new AI model demonstrates human-level reasoning capabilities, marking a significant breakthrough in artificial intelligence research. This development represents a major step forward in the field of artificial intelligence, with implications for various industries and applications. The model, developed by researchers at leading institutions, shows remarkable ability to understand and process complex information in ways that were previously thought to be uniquely human. This breakthrough opens up new possibilities for AI applications in fields such as healthcare, education, and scientific research. The implications of this development are far-reaching and could fundamentally change how we interact with technology in the coming years.",
-    author: "Dr. Sarah Chen",
-    source: "Nature AI",
-    url: "#",
-    publishedAt: "2024-01-15T10:30:00Z",
-    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
-    category: "AI & Technology",
-    tags: ["AI", "artificial intelligence", "research", "breakthrough"],
-    readingTime: 8,
-    wordCount: 1600,
-    sentiment: "positive",
-    language: "en",
-    country: "US",
-    apiSource: "rss-feed",
-    sourceCount: 1
-  };
+
 
   useEffect(() => {
     const loadArticle = async () => {
       setIsLoading(true);
       try {
-        // For now, use mock data
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setArticle(mockArticle);
+        // TODO: Implement real article loading
+        setError('Article loading not implemented yet');
       } catch (err) {
         console.error('Error loading article:', err);
         setError('Failed to load article');
@@ -88,19 +67,8 @@ export function EnhancedArticleDetail({ articleId, onBack }: EnhancedArticleDeta
     
     setSummaryLoading(true);
     try {
-      // Mock AI summary generation
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setAiSummary({
-        summary: "This article discusses a significant breakthrough in artificial intelligence research, where a new model demonstrates human-level reasoning capabilities. The development represents a major advancement in AI technology with far-reaching implications.",
-        key_points: [
-          "New AI model shows human-level reasoning abilities",
-          "Major breakthrough in artificial intelligence research",
-          "Implications for healthcare, education, and scientific research",
-          "Could fundamentally change human-technology interaction"
-        ],
-        essential_info: "The research demonstrates that AI systems can now process and understand complex information in ways previously thought to be uniquely human, opening new possibilities for AI applications across various industries.",
-        reading_time: 3
-      });
+      // TODO: Implement real AI summary generation
+      throw new Error("AI summary generation not implemented yet");
     } catch (error) {
       console.error('Error generating AI summary:', error);
     } finally {

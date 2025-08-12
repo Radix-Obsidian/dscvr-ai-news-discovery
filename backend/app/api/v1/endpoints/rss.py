@@ -66,40 +66,11 @@ async def proxy_rss_feed(request: RSSProxyRequest):
 @router.get("/trending")
 async def get_trending_feeds():
     """Get trending RSS feeds"""
-    # Mock trending feeds data
-    trending_feeds = [
-        {
-            "id": "tech-news",
-            "name": "Tech News",
-            "url": "https://feeds.feedburner.com/TechCrunch",
-            "category": "Technology",
-            "priority": 1
-        },
-        {
-            "id": "science-news",
-            "name": "Science Daily",
-            "url": "https://www.sciencedaily.com/rss/top/technology.xml",
-            "category": "Science",
-            "priority": 2
-        }
-    ]
-    
-    return {"success": True, "data": trending_feeds}
+    # TODO: Implement real trending feeds
+    return {"success": True, "data": []}
 
 @router.get("/category/{category}")
 async def get_feeds_by_category(category: str):
     """Get RSS feeds by category"""
-    # Mock category feeds
-    category_feeds = {
-        "Technology": [
-            {"id": "tech-1", "name": "Tech News", "url": "https://feeds.feedburner.com/TechCrunch"},
-            {"id": "tech-2", "name": "The Verge", "url": "https://www.theverge.com/rss/index.xml"}
-        ],
-        "Science": [
-            {"id": "science-1", "name": "Science Daily", "url": "https://www.sciencedaily.com/rss/top/technology.xml"},
-            {"id": "science-2", "name": "Nature", "url": "https://www.nature.com/nature.rss"}
-        ]
-    }
-    
-    feeds = category_feeds.get(category, [])
-    return {"success": True, "data": feeds}
+    # TODO: Implement real category feeds
+    return {"success": True, "data": []}

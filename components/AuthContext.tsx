@@ -47,40 +47,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const signIn = async (email: string, _password: string) => {
-    // Mock authentication - in real app, this would validate credentials
-    const mockUser: User = {
-      id: "1",
-      email,
-      name: "Demo User",
-      preferences: {
-        theme: "dark",
-        notifications: true,
-        emailUpdates: false,
-        interests: ["Technology", "Science", "Business"]
-      }
-    };
-    
-    setUser(mockUser);
-    // setIsAuthenticated(true); // This line was removed from the new_code, so it's removed here.
+  const signIn = async (email: string, password: string) => {
+    // TODO: Implement real authentication
+    console.log("Sign in:", email, password);
+    throw new Error("Authentication not implemented yet");
   };
 
-  const signUp = async (email: string, _password: string, name: string) => {
-    // Mock registration - in real app, this would create a new user
-    const mockUser: User = {
-      id: "1",
-      email,
-      name,
-      preferences: {
-        theme: "dark",
-        notifications: true,
-        emailUpdates: false,
-        interests: ["Technology", "Science", "Business"]
-      }
-    };
-    
-    setUser(mockUser);
-    // setIsAuthenticated(true); // This line was removed from the new_code, so it's removed here.
+  const signUp = async (email: string, password: string, name: string) => {
+    // TODO: Implement real registration
+    console.log("Sign up:", email, password, name);
+    throw new Error("Registration not implemented yet");
   };
 
   const signOut = async () => {

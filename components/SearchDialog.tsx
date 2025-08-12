@@ -24,10 +24,7 @@ export function SearchDialog({ isOpen, onClose, onArticleClick }: SearchDialogPr
   const { items: searchResults, loading: isSearching, error: searchError, search, clearSearch } = useSearchItems(20);
   const { items: trendingItems, loading: trendingLoading } = useTrendingItems(5);
   
-  // Mock recent searches for now (would come from user history in real app)
-  const recentSearches = [
-    "AI breakthrough", "Quantum computing", "Climate tech", "Space exploration"
-  ];
+
 
   const handleSearch = async (searchQuery: string) => {
     if (!searchQuery.trim()) {

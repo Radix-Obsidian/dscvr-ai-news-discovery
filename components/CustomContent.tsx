@@ -27,44 +27,7 @@ interface CustomFeed {
   color: string;
 }
 
-const mockCustomFeeds: CustomFeed[] = [
-  {
-    id: "1",
-    name: "AI Breakthroughs",
-    description: "Latest developments in artificial intelligence and machine learning",
-    keywords: ["AI", "Machine Learning", "Neural Networks", "Deep Learning"],
-    sources: ["TechCrunch", "MIT Technology Review", "Nature AI"],
-    isPublic: true,
-    followers: 1247,
-    articles: 89,
-    lastUpdated: "2 hours ago",
-    color: "bg-blue-500"
-  },
-  {
-    id: "2", 
-    name: "Quantum Research",
-    description: "Quantum computing and quantum physics research updates",
-    keywords: ["Quantum", "Computing", "Physics", "Entanglement"],
-    sources: ["Nature Physics", "Science", "IEEE Spectrum"],
-    isPublic: false,
-    followers: 0,
-    articles: 34,
-    lastUpdated: "5 hours ago",
-    color: "bg-purple-500"
-  },
-  {
-    id: "3",
-    name: "Climate Tech",
-    description: "Environmental technology and climate change solutions",
-    keywords: ["Climate", "Environment", "Renewable Energy", "Sustainability"],
-    sources: ["CleanTechnica", "GreenTech Media", "Yale Environment 360"],
-    isPublic: true,
-    followers: 892,
-    articles: 156,
-    lastUpdated: "1 day ago",
-    color: "bg-green-500"
-  }
-];
+
 
 const suggestedTopics = [
   "Space Exploration", "Biotechnology", "Renewable Energy", "Cybersecurity", 
@@ -91,7 +54,7 @@ export function CustomContent({ onArticleClick: _onArticleClick, onCategoryChang
   const [selectedSources, setSelectedSources] = useState<string[]>([]);
   const [isPublic, setIsPublic] = useState(true);
   const [followedFeeds, setFollowedFeeds] = useState<string[]>([]);
-  const [myFeeds, setMyFeeds] = useState(mockCustomFeeds);
+  const [myFeeds, setMyFeeds] = useState<CustomFeed[]>([]);
 
   const handleCreateFeed = () => {
     const newFeed: CustomFeed = {
