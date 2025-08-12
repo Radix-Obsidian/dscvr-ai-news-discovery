@@ -6,12 +6,13 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: parseInt(process.env.PORT || '3002'),
-    host: '0.0.0.0',
-    open: false,
-    fs: {
-      allow: ['..']
-    }
+    port: 3000,
+    host: 'localhost',
+    open: true
+  },
+  preview: {
+    port: 3000,
+    host: 'localhost'
   },
   resolve: {
     alias: {

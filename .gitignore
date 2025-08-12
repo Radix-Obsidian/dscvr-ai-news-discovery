@@ -181,8 +181,7 @@ public
 dist/
 dist-ssr/
 
-# Docker
-.dockerignore
+
 
 # Ollama
 .ollama/

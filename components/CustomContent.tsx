@@ -82,7 +82,8 @@ interface CustomContentProps {
   onCategoryChange?: (category: string) => void;
 }
 
-export function CustomContent({ onArticleClick, onCategoryChange }: CustomContentProps) {
+export function CustomContent({ onArticleClick: _onArticleClick, onCategoryChange: _onCategoryChange }: CustomContentProps) {
+  // Props are available for future use
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [newFeedName, setNewFeedName] = useState("");
   const [newFeedDescription, setNewFeedDescription] = useState("");

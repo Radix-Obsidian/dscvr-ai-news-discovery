@@ -31,17 +31,48 @@ A modern, AI-powered news discovery platform built with React, TypeScript, and F
 - **Pydantic** for data validation
 
 ### Infrastructure
-- **Docker** for containerization
-- **Railway** for full-stack deployment (frontend + backend)
-- **PostgreSQL** for database (included with Railway)
+- **Local Development** - Simplified setup for development
+- **PostgreSQL** for database (local or cloud)
+- **Ollama** for local AI processing
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 18+ 
 - Python 3.11+
-- Docker (optional)
 - Ollama (for AI features)
+
+### 1. Setup Environment
+```bash
+# Create environment files
+./setup-env.sh
+```
+
+### 2. Install Dependencies
+```bash
+# Install frontend dependencies
+npm install
+
+# Install backend dependencies
+cd backend
+pip install -r requirements.txt
+cd ..
+```
+
+### 3. Download AI Models
+```bash
+# Download the default model
+ollama pull llama2:7b
+```
+
+### 4. Start the Application
+```bash
+# Use the convenience script
+./start-local.sh
+
+# Or start manually:
+npm run dev
+```
 
 ### Frontend Setup
 ```bash
@@ -60,7 +91,7 @@ npm run build
 # Navigate to backend directory
 cd backend
 
-# Create virtual environment
+# Create virtual environment (optional)
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
@@ -71,13 +102,15 @@ pip install -r requirements.txt
 python main.py
 ```
 
-### Docker Setup
+### Quick Start (All Services)
 ```bash
-# Start all services
-docker-compose up -d
+# Use the convenience script to start everything
+./start-local.sh
 
-# View logs
-docker-compose logs -f
+# Or run manually:
+# Terminal 1: ollama serve
+# Terminal 2: cd backend && python main.py
+# Terminal 3: npm run dev
 ```
 
 ## 📁 Project Structure
@@ -109,11 +142,20 @@ Create a `.env` file in the root directory:
 ```env
 # Frontend
 VITE_API_URL=http://localhost:8000
+VITE_SUPABASE_URL=https://itmtexyyxpzddlutxoyxxs.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0bXRleHl4cHpkZGx1dHhveHhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NzQ0NzYsImV4cCI6MjA3MDU1MDQ3Nn0.NjMkMu-fWYX8dF_eHUwDM2Mq4k1MexFTfXa4iGI-vYs
+VITE_OLLAMA_URL=http://localhost:11434
+VITE_OLLAMA_MODEL=llama2
+```
 
+Create a `.env` file in the `backend/` directory:
+
+```env
 # Backend
+DATABASE_URL=sqlite:///./database/dscvr_news.db
+SECRET_KEY=your-super-secret-key-change-this-in-production
 OLLAMA_HOST=http://localhost:11434
-OLLAMA_MODEL=llama2
-DATABASE_URL=sqlite:///./dscvr_ai.db
+OLLAMA_MODEL=llama2:7b
 ```
 
 ### Ollama Setup
@@ -124,16 +166,19 @@ DATABASE_URL=sqlite:///./dscvr_ai.db
 
 ## 🚀 Deployment
 
-### Railway (Full-Stack)
-1. Connect your GitHub repository to Railway
-2. Railway will automatically detect frontend and backend services
-3. Configure environment variables in Railway dashboard
-4. Deploy both services with one click
+### Local Development
+This project is configured for local development. For production deployment, you can:
 
-### Manual Setup
-1. **Frontend Service**: Root directory, build command: `npm run build`
-2. **Backend Service**: `backend/` directory, start command: `python main.py`
-3. **Database**: Add PostgreSQL service in Railway
+1. **Build the frontend**: `npm run build`
+2. **Deploy to any static hosting service** (Vercel, Netlify, etc.)
+3. **Deploy the backend** to any Python hosting service (Railway, Heroku, etc.)
+4. **Set up a database** (PostgreSQL, MySQL, etc.)
+
+### Environment Setup
+Make sure to update environment variables for production:
+- `VITE_API_URL` - Your backend API URL
+- `DATABASE_URL` - Your production database URL
+- `SECRET_KEY` - A secure secret key
 
 ## 🤝 Contributing
 
@@ -152,7 +197,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Radix UI](https://www.radix-ui.com/) for accessible components
 - [Tailwind CSS](https://tailwindcss.com/) for utility-first CSS
 - [Ollama](https://ollama.ai/) for local AI inference
-- [Railway](https://railway.app/) for full-stack deployment platform
+- [Vite](https://vitejs.dev/) for fast development and building
 
 ## 📞 Support
 

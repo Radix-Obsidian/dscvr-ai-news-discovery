@@ -389,7 +389,6 @@ export function EnhancedArticleDetail({ articleId, onBack }: EnhancedArticleDeta
       <AIChatDialog
         isOpen={isAIChatOpen}
         onClose={() => setIsAIChatOpen(false)}
-        articleId={article.id}
         articleTitle={article.title}
       />
     </div>

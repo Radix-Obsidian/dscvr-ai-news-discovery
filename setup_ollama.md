@@ -138,7 +138,7 @@ ollama pull llama2
 ### Custom Model Configuration
 Create a `Modelfile` for custom configurations:
 
-```dockerfile
+```modelfile
 FROM llama2:7b
 PARAMETER temperature 0.7
 PARAMETER top_p 0.9

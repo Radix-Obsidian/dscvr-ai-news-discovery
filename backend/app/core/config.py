@@ -31,8 +31,8 @@ class Settings(BaseSettings):
     OLLAMA_HOST: str = "http://localhost:11434"
     OLLAMA_MODEL: str = "llama2"  # or "mistral", "codellama", etc.
     
-    # Redis (for caching and background tasks)
-    REDIS_URL: str = "redis://localhost:6379"
+    # Cache configuration (in-memory for now)
+    CACHE_TTL: int = 3600
     
     # News Sources
     NEWS_SOURCES: List[str] = [

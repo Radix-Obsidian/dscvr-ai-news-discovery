@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Script to pull Ollama models after Railway deployment
-# This can be run manually or as a Railway post-deploy hook
+# Script to pull Ollama models for local development
+# Run this after installing Ollama to set up your models
 
 OLLAMA_URL="${OLLAMA_URL:-http://localhost:11434}"
 

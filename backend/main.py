@@ -60,7 +60,7 @@ async def health_check():
 # Performance monitoring endpoint
 @app.get("/performance")
 async def performance_check():
-    from app.core.cache import get_cache_stats
+    
     import psutil
     import time
     
@@ -68,8 +68,8 @@ async def performance_check():
     cpu_percent = psutil.cpu_percent(interval=1)
     memory = psutil.virtual_memory()
     
-    # Get cache stats
-    cache_stats = get_cache_stats()
+    # Cache stats (simplified)
+    cache_stats = {"status": "in-memory"}
     
     return {
         "status": "healthy",

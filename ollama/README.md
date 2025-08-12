@@ -1,27 +1,30 @@
-# Ollama Service for Railway
+# Ollama Local Setup
 
-This service provides AI inference capabilities using Ollama on Railway.
+This directory contains configuration for running Ollama locally for AI inference capabilities.
 
 ## 🚀 Quick Setup
 
-1. **Deploy to Railway:**
-   - Go to [Railway](https://railway.app)
-   - Create new project from GitHub repo
-   - Select this `ollama/` directory
-   - Railway will automatically build and deploy
+1. **Install Ollama:**
+   - Download from [ollama.ai](https://ollama.ai)
+   - Install and start the service
 
 2. **Pull Models:**
-   After deployment, pull the models you need:
    ```bash
-   # Connect to your Railway Ollama service
-   curl -X POST https://your-ollama-service.railway.app/api/pull \
-     -H "Content-Type: application/json" \
-     -d '{"name": "llama2"}'
+   # Pull the default model
+   ollama pull llama2
+   
+   # Or pull specific models
+   ollama pull llama2:7b
+   ollama pull mistral:7b
    ```
 
 3. **Test the Service:**
    ```bash
-   curl https://your-ollama-service.railway.app/api/tags
+   # Start Ollama
+   ollama serve
+   
+   # Test in another terminal
+   curl http://localhost:11434/api/tags
    ```
 
 ## 📋 Available Models
@@ -40,17 +43,17 @@ This service provides AI inference capabilities using Ollama on Railway.
 ## 📊 Monitoring
 
 - Health check endpoint: `/api/tags`
-- Logs available in Railway dashboard
+- Logs available in your terminal
 - Model status: `/api/tags`
 
 ## 💡 Usage
 
-Once deployed, your backend can connect to:
+For local development, your backend connects to:
 ```
-https://your-ollama-service.railway.app
+http://localhost:11434
 ```
 
 Update your backend environment variable:
 ```
-OLLAMA_HOST=https://your-ollama-service.railway.app
+OLLAMA_HOST=http://localhost:11434
 ```
