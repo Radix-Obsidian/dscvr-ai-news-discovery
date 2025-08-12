@@ -1,3 +1,10 @@
+// Add proper type imports for browser APIs
+interface RequestInit {
+  method?: string;
+  headers?: Record<string, string>;
+  body?: string | FormData;
+}
+
 // RSS Proxy Service to handle CORS and rate limiting issues
 export interface RSSProxyResponse {
   success: boolean;

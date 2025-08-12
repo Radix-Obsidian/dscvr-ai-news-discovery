@@ -180,7 +180,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
               <div className="space-y-6">
                 <div>
                   <Label className="text-foreground font-medium">Interests</Label>
-                  <p className="text-sm text-muted-foreground mb-3">Select topics you're interested in</p>
+                  <p className="text-sm text-muted-foreground mb-3">Select topics you&apos;re interested in</p>
                   <div className="flex flex-wrap gap-2">
                     {/* availableInterests was removed from imports, so it's removed here */}
                     {interests.map((interest) => (

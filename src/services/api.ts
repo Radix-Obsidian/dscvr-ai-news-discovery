@@ -1,3 +1,10 @@
+// Add proper type imports for browser APIs
+interface RequestInit {
+  method?: string;
+  headers?: Record<string, string>;
+  body?: string | FormData;
+}
+
 const API_BASE_URL = 'http://localhost:8000/api/v1';
 
 // Types

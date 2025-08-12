@@ -35,12 +35,32 @@ git push -u origin main
 1. Go to [Railway](https://railway.app) and sign in with GitHub
 2. Click "New Project" → "Deploy from GitHub repo"
 3. Select your GitHub repository
-4. Railway will automatically detect both frontend and backend services
-5. Configure the services:
+4. Railway will automatically detect services:
    - **Frontend Service**: Root directory, build command: `npm run build`
    - **Backend Service**: `backend/` directory, start command: `python main.py`
-6. Add Environment Variables (see Environment Variables section below)
-7. Click "Deploy"
+   - **Ollama Service**: `ollama/` directory (optional, for AI features)
+5. Add Environment Variables (see Environment Variables section below)
+6. Click "Deploy"
+
+### 4. Set up Ollama (Optional but Recommended)
+
+1. **Deploy Ollama Service:**
+   - In Railway dashboard, click "New Service" → "GitHub Repo"
+   - Select your repository and choose the `ollama/` directory
+   - Railway will build and deploy the Ollama service
+
+2. **Pull AI Models:**
+   After Ollama deployment, run this command to pull the model:
+   ```bash
+   curl -X POST https://your-ollama-service.railway.app/api/pull \
+     -H "Content-Type: application/json" \
+     -d '{"name": "llama2:7b"}'
+   ```
+
+3. **Test Ollama:**
+   ```bash
+   curl https://your-ollama-service.railway.app/api/tags
+   ```
 
 ## 🔧 Railway Configuration
 
@@ -99,11 +119,17 @@ VITE_API_URL=https://your-backend-service.railway.app
 
 ### Backend Service (Railway)
 ```
-OLLAMA_HOST=https://your-ollama-instance.com
-OLLAMA_MODEL=llama2
+OLLAMA_HOST=https://your-ollama-service.railway.app
+OLLAMA_MODEL=llama2:7b
 DATABASE_URL=postgresql://...
-SECRET_KEY=your-secret-key
+SECRET_KEY=d3b4a16f2c6521073a2c729a26f036d8769406767d5501720041c727f0628a95
 PORT=8000
+```
+
+### Ollama Service (Railway)
+```
+OLLAMA_HOST=0.0.0.0
+OLLAMA_ORIGINS=*
 ```
 
 ## 📊 Monitoring

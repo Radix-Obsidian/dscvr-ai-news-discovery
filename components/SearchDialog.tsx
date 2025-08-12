@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -250,7 +250,7 @@ export function SearchDialog({ isOpen, onClose, onArticleClick }: SearchDialogPr
                   </div>
                   <h3 className="text-lg font-semibold text-foreground mb-2">Search failed</h3>
                   <p className="text-muted-foreground mb-6">
-                    We couldn't complete your search. Please try again.
+                    We couldn&apos;t complete your search. Please try again.
                   </p>
                   <Button 
                     variant="outline" 

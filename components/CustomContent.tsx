@@ -10,12 +10,9 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Switch } from "./ui/switch";
 import { useState } from "react";
-import { Article, FeedItem } from "./ArticleCard";
+// Article and FeedItem imports removed as they're not being used
 
-interface CustomContentProps {
-  onArticleClick?: (article: Article | FeedItem) => void;
-  onCategoryChange?: (category: string) => void;
-}
+// CustomContentProps interface removed as it's not being used
 
 interface CustomFeed {
   id: string;
@@ -80,7 +77,7 @@ const popularSources = [
   "The Verge", "Wired", "Ars Technica", "Scientific American", "New Scientist"
 ];
 
-export function CustomContent({ }: CustomContentProps) {
+export function CustomContent() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [newFeedName, setNewFeedName] = useState("");
   const [newFeedDescription, setNewFeedDescription] = useState("");

@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3002,
+    port: parseInt(process.env.PORT || '3002'),
+    host: '0.0.0.0',
     open: false,
     fs: {
       allow: ['..']
@@ -14,8 +15,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      'components': path.resolve(__dirname, './components')
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'components': fileURLToPath(new URL('./components', import.meta.url))
     }
   },
   optimizeDeps: {

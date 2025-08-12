@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -145,7 +145,7 @@ export function AuthDialog({ isOpen, onOpenChange, defaultMode = "signin" }: Aut
 
         <div className="text-center">
           <p className="text-sm text-muted-foreground">
-            {mode === "signin" ? "Don't have an account?" : "Already have an account?"}{" "}
+            {mode === "signin" ? "Don&apos;t have an account?" : "Already have an account?"}{" "}
             <Button 
               variant="link" 
               onClick={switchMode}
