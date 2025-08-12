@@ -1,0 +1,14 @@
+FROM ollama/ollama:latest
+
+# Set working directory
+WORKDIR /root
+
+# Expose Ollama port
+EXPOSE 11434
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:11434/api/tags || exit 1
+
+# Start Ollama
+CMD ["ollama", "serve"]

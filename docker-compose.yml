@@ -1,0 +1,61 @@
+services:
+  # Redis for caching and Celery
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - backend_data:/app/database
+    environment:
+      - DATABASE_URL=sqlite:///./database/dscvr_news.db
+      - OLLAMA_HOST=http://host.docker.internal:11434
+      - OLLAMA_MODEL=llama2:7b
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # React Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - VITE_SUPABASE_URL=https://itmtexyyxpzddlutxoyxxs.supabase.co
+      - VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml0bXRleHl4cHpkZGx1dHhveHhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ5NzQ0NzYsImV4cCI6MjA3MDU1MDQ3Nn0.NjMkMu-fWYX8dF_eHUwDM2Mq4k1MexFTfXa4iGI-vYs
+      - VITE_OLLAMA_URL=http://localhost:11434
+      - VITE_OLLAMA_MODEL=llama2
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  redis_data:
+  backend_data:
