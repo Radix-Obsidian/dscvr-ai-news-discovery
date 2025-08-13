@@ -1,65 +1,125 @@
 "use client";
 
 import * as React from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-
 import { cn } from "./utils";
 
-function Tabs({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+interface TabsContextType {
+  activeTab: string;
+  setActiveTab: (value: string) => void;
+}
+
+const TabsContext = React.createContext<TabsContextType | undefined>(undefined);
+
+interface TabsProps {
+  defaultValue?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+  className?: string;
+  children: React.ReactNode;
+}
+
+function Tabs({ 
+  defaultValue, 
+  value, 
+  onValueChange, 
+  className, 
+  children 
+}: TabsProps) {
+  const [activeTab, setActiveTab] = React.useState(value || defaultValue || "");
+  
+  const handleTabChange = React.useCallback((newValue: string) => {
+    if (value === undefined) {
+      setActiveTab(newValue);
+    }
+    onValueChange?.(newValue);
+  }, [value, onValueChange]);
+
+  const contextValue = React.useMemo(() => ({
+    activeTab: value || activeTab,
+    setActiveTab: handleTabChange,
+  }), [value, activeTab, handleTabChange]);
+
   return (
-    <TabsPrimitive.Root
-      data-slot="tabs"
-      className={cn("flex flex-col gap-2", className)}
-      {...props}
-    />
+    <TabsContext.Provider value={contextValue}>
+      <div className={cn("flex flex-col gap-2", className)}>
+        {children}
+      </div>
+    </TabsContext.Provider>
   );
 }
 
-function TabsList({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
+interface TabsListProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+function TabsList({ className, children }: TabsListProps) {
   return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
+    <div className={cn("inline-flex h-10 items-center justify-center rounded-lg bg-gray-100 p-1 text-gray-500 dark:bg-gray-800 dark:text-gray-400", className)}>
+      {children}
+    </div>
+  );
+}
+
+interface TabsTriggerProps {
+  value: string;
+  className?: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+}
+
+function TabsTrigger({ value, className, children, disabled }: TabsTriggerProps) {
+  const context = React.useContext(TabsContext);
+  if (!context) {
+    throw new Error("TabsTrigger must be used within a Tabs component");
+  }
+  
+  const { activeTab, setActiveTab } = context;
+  const isActive = activeTab === value;
+  
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={() => setActiveTab(value)}
       className={cn(
-        "bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-xl p-[3px] flex",
-        className,
+        "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+        isActive 
+          ? "bg-white text-gray-950 shadow-sm dark:bg-gray-950 dark:text-gray-50"
+          : "hover:bg-gray-200/50 hover:text-gray-700 dark:hover:bg-gray-700/50 dark:hover:text-gray-300",
+        className
       )}
-      {...props}
-    />
+    >
+      {children}
+    </button>
   );
 }
 
-function TabsTrigger({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
-  return (
-    <TabsPrimitive.Trigger
-      data-slot="tabs-trigger"
-      className={cn(
-        "data-[state=active]:bg-card dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
-      {...props}
-    />
-  );
+interface TabsContentProps {
+  value: string;
+  className?: string;
+  children: React.ReactNode;
 }
 
-function TabsContent({
-  className,
-  ...props
-}: React.ComponentProps<typeof TabsPrimitive.Content>) {
+function TabsContent({ value, className, children }: TabsContentProps) {
+  const context = React.useContext(TabsContext);
+  if (!context) {
+    throw new Error("TabsContent must be used within a Tabs component");
+  }
+  
+  const { activeTab } = context;
+  
+  if (activeTab !== value) {
+    return null;
+  }
+  
   return (
-    <TabsPrimitive.Content
-      data-slot="tabs-content"
-      className={cn("flex-1 outline-none", className)}
-      {...props}
-    />
+    <div 
+      className={cn("mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2", className)}
+      tabIndex={0}
+    >
+      {children}
+    </div>
   );
 }
 

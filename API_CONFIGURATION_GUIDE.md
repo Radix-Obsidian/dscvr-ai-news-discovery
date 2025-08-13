@@ -50,7 +50,7 @@ WORLD_NEWS_API_KEY=your-world-news-api-key-here
 ### Create `.env` file in `backend/` directory:
 ```env
 # Database Configuration
-DATABASE_URL=sqlite:///./dscvr_news.db
+DATABASE_URL=postgresql://username:password@localhost:5432/dscvr_news
 
 # Security
 SECRET_KEY=your-super-secret-key-change-this-in-production

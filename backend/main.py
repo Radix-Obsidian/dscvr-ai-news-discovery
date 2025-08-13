@@ -5,6 +5,10 @@ from contextlib import asynccontextmanager
 import uvicorn
 from typing import List, Optional
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file in parent directory
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 from app.core.config import settings
 from app.core.database import engine, Base
@@ -12,7 +16,7 @@ from app.api.v1.api import api_router
 from app.core.security import get_current_user
 from app.models.article import Article as ArticleModel
 from app.models.user import User
-from app.services.news_service import NewsService
+
 from app.services.ai_service import AIService
 
 # Create database tables

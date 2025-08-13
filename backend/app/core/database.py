@@ -3,28 +3,24 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 import os
+from dotenv import load_dotenv
 
-# Database URL
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./dscvr_news.db")
+# Load environment variables from parent directory
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), '.env'))
 
-# Create engine with performance optimizations
+# Database URL - PostgreSQL only
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable must be set to a PostgreSQL connection string")
+
+# Create engine with PostgreSQL optimizations
 engine = create_engine(
     DATABASE_URL,
-    # Connection pooling for better performance
     poolclass=QueuePool,
     pool_size=20,  # Number of connections to maintain
     max_overflow=30,  # Additional connections when pool is full
     pool_pre_ping=True,  # Verify connections before use
     pool_recycle=3600,  # Recycle connections every hour
-    
-    # SQLite specific optimizations
-    connect_args={
-        "check_same_thread": False,
-        "timeout": 30,
-        "isolation_level": None,  # Autocommit mode for better performance
-    } if "sqlite" in DATABASE_URL else {},
-    
-    # Query optimization
     echo=False,  # Disable SQL logging in production
 )
 

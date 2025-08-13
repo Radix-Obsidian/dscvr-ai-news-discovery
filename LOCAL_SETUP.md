@@ -70,7 +70,7 @@ VITE_OLLAMA_MODEL=llama2
 Create `.env` file in the `backend/` directory:
 ```env
 # Database Configuration
-DATABASE_URL=sqlite:///./database/dscvr_news.db
+DATABASE_URL=postgresql://username:password@localhost:5432/dscvr_news
 
 # Security
 SECRET_KEY=your-super-secret-key-change-this-in-production
@@ -242,7 +242,7 @@ npm install
 When you're ready to deploy to production:
 
 1. **Frontend**: Build with `npm run build` and deploy to any static hosting service
-2. **Backend**: Deploy to any Python hosting service (Railway, Heroku, etc.)
+2. **Backend**: Deploy to any Python hosting service (Heroku, DigitalOcean, etc.)
 3. **Database**: Set up a production database (PostgreSQL, MySQL, etc.)
 4. **AI Service**: Deploy Ollama to a cloud service or use a hosted AI API
 

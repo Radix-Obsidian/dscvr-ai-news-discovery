@@ -55,7 +55,7 @@ npm run lint
 ## 🚀 Next Steps
 
 1. **Add Backend**: Set up FastAPI backend in `backend/` directory
-2. **Add Database**: Configure PostgreSQL or SQLite
+2. **Add Database**: Configure PostgreSQL
 3. **Add AI Features**: Set up Ollama for AI-powered features
 4. **Add Authentication**: Implement user authentication
 5. **Add RSS Feeds**: Integrate RSS feed aggregation

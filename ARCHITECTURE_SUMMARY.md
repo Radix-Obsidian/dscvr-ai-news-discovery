@@ -8,7 +8,7 @@ Your project has been successfully converted from a pure React application to a 
 
 ### Backend (Python/FastAPI) - Running on http://localhost:8000
 - **FastAPI**: Modern, fast web framework
-- **SQLAlchemy**: Database ORM with SQLite
+- **SQLAlchemy**: Database ORM with PostgreSQL
 - **JWT Authentication**: Secure user authentication
 - **OpenAI Integration**: AI-powered content analysis
 - **RSS Feed Processing**: News aggregation from multiple sources
@@ -140,7 +140,7 @@ Dscvr AI News Discovery Platform/
 
 ### Scalability:
 - **Microservices Ready**: Easy to split into separate services
-- **Database Flexibility**: Can switch from SQLite to PostgreSQL
+- **Database**: PostgreSQL for production-ready scalability
 - **Caching**: Redis integration for performance
 
 ### Development Experience:

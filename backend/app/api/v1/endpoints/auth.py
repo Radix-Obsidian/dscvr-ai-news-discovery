@@ -11,7 +11,7 @@ from app.core.security import (
     get_current_active_user,
     get_password_hash
 )
-from app.models.user import User, UserCreate, User as UserResponse
+from app.models.user import User, UserCreate, UserResponse
 from pydantic import BaseModel
 
 router = APIRouter()

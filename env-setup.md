@@ -22,7 +22,7 @@ NEWS_UPDATE_INTERVAL=600
 # =============================================================================
 # DATABASE CONFIGURATION
 # =============================================================================
-DATABASE_URL=sqlite:///backend/database/dscvr_ai.db
+DATABASE_URL=postgresql://username:password@localhost:5432/dscvr_news
 DATABASE_ECHO=false
 
 # =============================================================================

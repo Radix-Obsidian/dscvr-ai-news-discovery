@@ -19,7 +19,7 @@ A modern, AI-powered news discovery platform built with React, TypeScript, and F
 - **React 18** with TypeScript
 - **Vite** for fast development and building
 - **Tailwind CSS** for styling
-- **Radix UI** for accessible components
+- **TailGrids UI** for component library
 - **Lucide React** for icons
 - **Sonner** for toast notifications
 
@@ -152,7 +152,7 @@ Create a `.env` file in the `backend/` directory:
 
 ```env
 # Backend
-DATABASE_URL=sqlite:///./database/dscvr_news.db
+DATABASE_URL=postgresql://username:password@localhost:5432/dscvr_news
 SECRET_KEY=your-super-secret-key-change-this-in-production
 OLLAMA_HOST=http://localhost:11434
 OLLAMA_MODEL=llama2:7b
@@ -171,7 +171,7 @@ This project is configured for local development. For production deployment, you
 
 1. **Build the frontend**: `npm run build`
 2. **Deploy to any static hosting service** (Vercel, Netlify, etc.)
-3. **Deploy the backend** to any Python hosting service (Railway, Heroku, etc.)
+3. **Deploy the backend** to any Python hosting service (Heroku, DigitalOcean, etc.)
 4. **Set up a database** (PostgreSQL, MySQL, etc.)
 
 ### Environment Setup

@@ -24,9 +24,9 @@ class User(Base):
     reading_preferences = Column(Text, nullable=True)  # JSON string of preferences
     
     # Relationships
-    articles = relationship("Article", back_populates="author")
     reading_history = relationship("ReadingHistory", back_populates="user")
     ai_chats = relationship("AIChat", back_populates="user")
+    feed_subscriptions = relationship("UserFeedSubscription", back_populates="user")
 
 # Pydantic models for API
 class UserBase(BaseModel):
@@ -55,5 +55,5 @@ class UserInDB(UserBase):
     class Config:
         from_attributes = True
 
-class User(UserInDB):
+class UserResponse(UserInDB):
     pass

@@ -43,8 +43,9 @@ backend/.venv/
 
 # Database
 *.db
-*.sqlite
-*.sqlite3
+# PostgreSQL
+*.sql
+*.dump
 backend/database/
 backend/*.db
 

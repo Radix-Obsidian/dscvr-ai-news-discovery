@@ -72,7 +72,7 @@ def main():
         print("   3. Register a test user and start exploring!")
         print()
         print("🔧 Architecture:")
-        print("   • Backend: Python FastAPI with SQLite database")
+        print("   • Backend: Python FastAPI with PostgreSQL database")
         print("   • Frontend: React TypeScript with Tailwind CSS")
         print("   • AI Features: OpenAI integration ready")
         print("   • Authentication: JWT-based security")

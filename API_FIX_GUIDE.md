@@ -37,7 +37,7 @@ Create a `.env` file in your project root with the following content:
 VITE_NEWS_API_KEY=your-newsapi-org-key-here
 
 # Other configurations...
-DATABASE_URL=sqlite:///backend/database/dscvr_ai.db
+DATABASE_URL=postgresql://username:password@localhost:5432/dscvr_news
 SECRET_KEY=your-super-secret-key-change-this-in-production
 ```
 

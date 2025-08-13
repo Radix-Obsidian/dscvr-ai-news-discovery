@@ -7,8 +7,8 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "Dscvr AI News Discovery Platform"
     
-    # Database
-    DATABASE_URL: str = "sqlite:///./dscvr_news.db"
+    # Database - PostgreSQL required
+    DATABASE_URL: str
     
     # Security
     SECRET_KEY: str = "your-secret-key-here-change-in-production"
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     
     # AI/ML Services
     OPENAI_API_KEY: Optional[str] = None
-    NEWS_API_KEY: Optional[str] = None
+    NEWS_API_KEY: Optional[str] = "c293342f2e5244c8b5a713c43c105ee0"
     
     # Ollama Configuration (Local LLM)
     OLLAMA_HOST: str = "http://localhost:11434"
