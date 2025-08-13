@@ -86,14 +86,52 @@ After setup:
 3. You can scale up when needed
 4. Access database via Neon console or SQL clients
 
+## 🔄 GitHub Actions Integration (Optional)
+
+For automatic database branching on pull requests:
+
+### Step 7: Configure GitHub Secrets
+
+1. In your GitHub repository, go to **Settings** → **Secrets and variables** → **Actions**
+
+2. Add these **Repository secrets**:
+   - `NEON_API_KEY`: Get from Neon console → Account settings → API keys
+
+3. Add these **Repository variables**:
+   - `NEON_PROJECT_ID`: Get from your Neon project dashboard
+
+### Step 8: Workflow Features
+
+The GitHub workflow (`/.github/workflows/neon-branch.yml`) automatically:
+
+- ✅ Creates database branches for each PR
+- ✅ Runs database migrations on new branches
+- ✅ Posts schema diff comments on PRs
+- ✅ Cleans up branches when PRs are closed
+
+### Step 9: Test the Workflow
+
+1. Create a pull request
+2. Check the **Actions** tab to see the workflow run
+3. Verify the database branch was created in Neon console
+4. Look for schema diff comments on your PR
+
 ## 🛠️ Troubleshooting
 
 **Connection Issues:**
+
 - Ensure SSL mode is enabled
 - Check firewall settings
 - Verify connection string format
 
 **Performance:**
+
 - Free tier has compute hour limits
 - Monitor usage in Neon console
 - Upgrade when needed for 24/7 uptime
+
+**GitHub Actions Issues:**
+
+- Verify NEON_API_KEY secret is set correctly
+- Check NEON_PROJECT_ID variable matches your project
+- Ensure workflow has proper permissions in repository settings

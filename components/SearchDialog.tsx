@@ -19,6 +19,12 @@ interface SearchDialogProps {
 export function SearchDialog({ isOpen, onClose, onArticleClick }: SearchDialogProps) {
   const [query, setQuery] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
+  const [recentSearches, setRecentSearches] = useState<string[]>([
+    "Artificial Intelligence",
+    "Climate Change",
+    "Space Exploration",
+    "Renewable Energy"
+  ]);
   
   // Use the new feed builder hooks
   const { items: searchResults, loading: isSearching, error: searchError, search, clearSearch } = useSearchItems(20);
@@ -34,6 +40,12 @@ export function SearchDialog({ isOpen, onClose, onArticleClick }: SearchDialogPr
     }
 
     setHasSearched(true);
+    
+    // Add to recent searches if not already present
+    if (!recentSearches.includes(searchQuery)) {
+      setRecentSearches(prev => [searchQuery, ...prev.slice(0, 4)]); // Keep only 5 most recent
+    }
+    
     await search(searchQuery);
   };
 
@@ -44,6 +56,12 @@ export function SearchDialog({ isOpen, onClose, onArticleClick }: SearchDialogPr
 
   const handleQuickSearch = (searchTerm: string) => {
     setQuery(searchTerm);
+    
+    // Add to recent searches if not already present
+    if (!recentSearches.includes(searchTerm)) {
+      setRecentSearches(prev => [searchTerm, ...prev.slice(0, 4)]); // Keep only 5 most recent
+    }
+    
     handleSearch(searchTerm);
   };
 
@@ -172,27 +190,29 @@ export function SearchDialog({ isOpen, onClose, onArticleClick }: SearchDialogPr
               <Separator className="bg-border/50" />
 
               {/* Recent Searches - Apple HIG: Quick access to previous searches */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-muted/50 rounded-lg">
-                    <Clock className="h-5 w-5 text-muted-foreground" />
+              {recentSearches.length > 0 && (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-muted/50 rounded-lg">
+                      <Clock className="h-5 w-5 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground">Recent Searches</h3>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground">Recent Searches</h3>
+                  <div className="grid gap-2">
+                    {recentSearches.map((search, index) => (
+                      <Button
+                        key={index}
+                        variant="ghost"
+                        className="w-full justify-start text-left h-12 px-4 hover:bg-accent/30 hover:text-foreground transition-colors rounded-lg"
+                        onClick={() => handleQuickSearch(search)}
+                      >
+                        <Search className="h-4 w-4 mr-3 text-muted-foreground" />
+                        <span className="text-foreground font-medium">{search}</span>
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid gap-2">
-                  {recentSearches.map((search, index) => (
-                    <Button
-                      key={index}
-                      variant="ghost"
-                      className="w-full justify-start text-left h-12 px-4 hover:bg-accent/30 hover:text-foreground transition-colors rounded-lg"
-                      onClick={() => handleQuickSearch(search)}
-                    >
-                      <Search className="h-4 w-4 mr-3 text-muted-foreground" />
-                      <span className="text-foreground font-medium">{search}</span>
-                    </Button>
-                  ))}
-                </div>
-              </div>
+              )}
 
               {/* Quick Suggestions - Apple HIG: Helpful suggestions for discovery */}
               <div className="space-y-4">
